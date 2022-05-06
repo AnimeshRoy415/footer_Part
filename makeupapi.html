@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container"></div>
+</body>
+</html>
+
+
+<script>
+const url="http://makeup-api.herokuapp.com/api/v1/products.json?brand=covergirl&product_type=lipstick"
+
+const container=document.getElementById("container")
+    
+    fetch(url)
+.then(function(res){
+
+    return res.json()
+
+})
+.then(function(res){
+    console.log("res:",res);
+    appendData(res.data)
+})
+.catch(function(err){
+    console.log("err:",err);
+})
+
+function appendData(data){
+    data.map(function(el){
+
+let div=document.createElement("div")
+
+let last_name=document.createElement("p")
+last_name.innerText=el.name;
+
+let first_name=document.createElement("p")
+first_name.innerText=el.price;
+
+let avatar=document.createElement("img")
+avatar.src=el.image_link;
+
+div.append(avatar,first_name,last_name);
+
+container.append(div);
+
+    });
+        
+    };
+</script>
